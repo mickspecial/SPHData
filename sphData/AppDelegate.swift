@@ -15,11 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
-		let nc = UINavigationController(rootViewController: ViewController())
+		// set up
+		let navCtrl = UINavigationController(rootViewController: HomeViewController())
 		window = UIWindow()
 		window?.makeKeyAndVisible()
-		window?.rootViewController = nc
+		window?.rootViewController = navCtrl
+		// styling
+		UINavigationBar.appearance().prefersLargeTitles = true
 		return true
 	}
 

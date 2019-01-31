@@ -8,13 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		setUpController()
 	}
-
-
+	
+	func setUpController() {
+		title = "Mobile Data Usage"
+		view.backgroundColor = Theme.current.backgroundColor
+	}
 }
 
