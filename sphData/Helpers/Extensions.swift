@@ -48,3 +48,10 @@ extension JSONDecoder {
 		}
 	}
 }
+
+extension Collection where Element == YearRecord {
+	var sortedByYear: [YearRecord] {
+		return self.sorted(by: { $0.year < $1.year })
+	}
+}
+

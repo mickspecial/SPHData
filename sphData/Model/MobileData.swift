@@ -28,6 +28,23 @@ struct MobileData: Codable {
 }
 
 extension MobileData {
+	// group all records with same year into dic
+	// ie 2004: [Record], 2005: [Record] etc
+	private func recordsByYear() -> [String: [Record]] {
+		let grouped = Dictionary(grouping: records) { record -> String in
+			return record.year
+		}
+		return grouped
+	}
+	
+	func yearlyDataRecords() -> [YearRecord] {
+		let groupedByYear = recordsByYear()
+		let tempData = groupedByYear.values.compactMap { YearRecord(group: $0) }
+		return tempData.sortedByYear
+	}
+}
+
+extension MobileData {
 	enum CodingKeys: String, CodingKey {
 		case success
 		case result
