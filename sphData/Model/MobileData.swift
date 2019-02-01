@@ -34,21 +34,3 @@ extension MobileData {
 		case records
 	}
 }
-
-extension MobileData {
-	
-	static func create(fromFile fileName: String) -> MobileData {
-		guard let url = Bundle.main.url(forResource: fileName, withExtension:"json") else {
-			fatalError("Unable to locate file \(fileName).json")
-		}
-		
-		let decoder = JSONDecoder()
-		decoder.dateDecodingStrategy = .iso8601
-		
-		guard let data = try? Data(contentsOf: url), let mobileData = try? decoder.decode(MobileData.self, from: data) else {
-			fatalError("Unable to convert json")
-		}
-		
-		return mobileData
-	}
-}

@@ -12,14 +12,20 @@ import XCTest
 class sphDataTests: XCTestCase {
 
     func testCreateModelFromLocalFilesEmpty() {
-		let testData = MobileData.create(fromFile: "dataSet1")
-		XCTAssertTrue(testData.success)
-		XCTAssertTrue(testData.records.isEmpty)
+		let decoder = JSONDecoder()
+		decoder.dateDecodingStrategy = .iso8601
+		decoder.decode(MobileData.self, fromFile: "dataSet1") { testData in
+			XCTAssertTrue(testData.success)
+			XCTAssertTrue(testData.records.isEmpty)
+		}
     }
 	
 	func testCreateModelFromLocalFilesNonEmpty() {
-		let testData = MobileData.create(fromFile: "dataSet2")
-		XCTAssertTrue(testData.success)
-		XCTAssertEqual(testData.records.count, 5)
+		let decoder = JSONDecoder()
+		decoder.dateDecodingStrategy = .iso8601
+		decoder.decode(MobileData.self, fromFile: "dataSet2") { testData in
+			XCTAssertTrue(testData.success)
+			XCTAssertEqual(testData.records.count, 5)
+		}
 	}
 }
