@@ -11,24 +11,15 @@ import XCTest
 
 class sphDataTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testCreateModelFromLocalFilesEmpty() {
+		let testData = MobileData.create(fromFile: "dataSet1")
+		XCTAssertTrue(testData.success)
+		XCTAssertTrue(testData.records.isEmpty)
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+	
+	func testCreateModelFromLocalFilesNonEmpty() {
+		let testData = MobileData.create(fromFile: "dataSet2")
+		XCTAssertTrue(testData.success)
+		XCTAssertEqual(testData.records.count, 5)
+	}
 }

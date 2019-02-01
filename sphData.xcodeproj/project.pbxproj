@@ -13,6 +13,10 @@
 		0067C01322039E6400F62208 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0067C01122039E6400F62208 /* LaunchScreen.storyboard */; };
 		0067C01E22039E6400F62208 /* sphDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067C01D22039E6400F62208 /* sphDataTests.swift */; };
 		0067C0292203A18500F62208 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067C0282203A18500F62208 /* Theme.swift */; };
+		0067C02E2203A3E400F62208 /* dataSet1.json in Resources */ = {isa = PBXBuildFile; fileRef = 0067C02D2203A3E400F62208 /* dataSet1.json */; };
+		0067C03222042F8F00F62208 /* MobileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067C03122042F8F00F62208 /* MobileData.swift */; };
+		0067C03422042FEC00F62208 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067C03322042FEC00F62208 /* Record.swift */; };
+		0067C0382204331600F62208 /* dataSet2.json in Resources */ = {isa = PBXBuildFile; fileRef = 0067C0372204331600F62208 /* dataSet2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,10 @@
 		0067C01D22039E6400F62208 /* sphDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sphDataTests.swift; sourceTree = "<group>"; };
 		0067C01F22039E6400F62208 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0067C0282203A18500F62208 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0067C02D2203A3E400F62208 /* dataSet1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dataSet1.json; sourceTree = "<group>"; };
+		0067C03122042F8F00F62208 /* MobileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileData.swift; sourceTree = "<group>"; };
+		0067C03322042FEC00F62208 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		0067C0372204331600F62208 /* dataSet2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dataSet2.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +86,11 @@
 			isa = PBXGroup;
 			children = (
 				0067C00A22039E6200F62208 /* HomeViewController.swift */,
-				0067C0282203A18500F62208 /* Theme.swift */,
-				0067C01122039E6400F62208 /* LaunchScreen.storyboard */,
+				0067C0362204300000F62208 /* Helpers */,
+				0067C03522042FF700F62208 /* Model */,
 				0067C00822039E6200F62208 /* AppDelegate.swift */,
+				0067C0392204340B00F62208 /* TestData */,
+				0067C01122039E6400F62208 /* LaunchScreen.storyboard */,
 				0067C00F22039E6400F62208 /* Assets.xcassets */,
 				0067C01422039E6400F62208 /* Info.plist */,
 			);
@@ -94,6 +104,32 @@
 				0067C01F22039E6400F62208 /* Info.plist */,
 			);
 			path = sphDataTests;
+			sourceTree = "<group>";
+		};
+		0067C03522042FF700F62208 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0067C03122042F8F00F62208 /* MobileData.swift */,
+				0067C03322042FEC00F62208 /* Record.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0067C0362204300000F62208 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0067C0282203A18500F62208 /* Theme.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0067C0392204340B00F62208 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				0067C02D2203A3E400F62208 /* dataSet1.json */,
+				0067C0372204331600F62208 /* dataSet2.json */,
+			);
+			path = TestData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +214,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0067C01322039E6400F62208 /* LaunchScreen.storyboard in Resources */,
+				0067C02E2203A3E400F62208 /* dataSet1.json in Resources */,
+				0067C0382204331600F62208 /* dataSet2.json in Resources */,
 				0067C01022039E6400F62208 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +235,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0067C0292203A18500F62208 /* Theme.swift in Sources */,
+				0067C03222042F8F00F62208 /* MobileData.swift in Sources */,
+				0067C03422042FEC00F62208 /* Record.swift in Sources */,
 				0067C00B22039E6200F62208 /* HomeViewController.swift in Sources */,
 				0067C00922039E6200F62208 /* AppDelegate.swift in Sources */,
 			);
