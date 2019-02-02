@@ -21,11 +21,11 @@ protocol ThemeProtocol {
 	var subTitleFont: UIFont { get }
 }
 
-class DefaultTheme: ThemeProtocol {
+struct DefaultTheme: ThemeProtocol {
 	var backgroundColor: UIColor { return UIColor.lightGray }
 	var defaultCellHeight: CGFloat { return 80 }
 	var defaultTextColor: UIColor { return UIColor.black }
 	var redTextColor: UIColor { return UIColor.red }
-	var titleFont: UIFont { return UIFont.systemFont(ofSize: 20, weight: .medium) }
-	var subTitleFont: UIFont { return UIFont.systemFont(ofSize: 16, weight: .regular) }
+	var titleFont: UIFont { return UIFont.preferredFont(forTextStyle: .title2) }
+	var subTitleFont: UIFont { return UIFont.preferredFont(forTextStyle: .body) }
 }

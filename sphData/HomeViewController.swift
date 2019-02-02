@@ -8,17 +8,10 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UITableViewController {
 	
 	private let tableDataSource = HomeViewDataSource()
-	var homeView: HomeView {
-		return view as! HomeView
-	}
-		
-	override func loadView() {
-		view = HomeView()
-	}
-	
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setUpController()
@@ -33,11 +26,10 @@ class HomeViewController: UIViewController {
 	}
 	
 	private func setupTableView() {
-		view.addSubview(homeView.tableView)
-		homeView.tableView.delegate = self
-		homeView.tableView.register(YearDataCell.self, forCellReuseIdentifier: YearDataCell.cellID)
-		homeView.tableView.dataSource = tableDataSource
-		tableDataSource.setDataSource()
+		tableView.register(YearDataCell.self, forCellReuseIdentifier: YearDataCell.cellID)
+		tableView.rowHeight = Theme.current.defaultCellHeight
+		tableView.allowsSelection = false
+		tableView.dataSource = tableDataSource
 	}
 	
 	private func checkLocalDataStore() {
@@ -63,11 +55,7 @@ class HomeViewController: UIViewController {
 	
 	private func refreshTableWithData(data: MobileData) {
 		let yearly = data.yearlyDataRecords()
-		tableDataSource.setDataSource(data: yearly)
-		homeView.tableView.reloadData()
+		tableDataSource.yearlyRecords = yearly
+		tableView.reloadData()
 	}
-}
-
-extension HomeViewController: UITableViewDelegate {
-
 }

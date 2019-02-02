@@ -30,7 +30,7 @@ extension JSONDecoder {
 	}
 	
 	func decode<T: Decodable>(_ type: T.Type, fromFile fileName: String, completion: @escaping (T) -> Void) {
-		guard let url = Bundle.main.url(forResource: fileName, withExtension:"json") else {
+		guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
 			fatalError("Unable to locate file \(fileName).json")
 		}
 
@@ -49,24 +49,8 @@ extension JSONDecoder {
 	}
 }
 
-extension Collection where Element == YearRecord {
-	var sortedByYear: [YearRecord] {
-		return self.sorted(by: { $0.year < $1.year })
-	}
-}
-
 extension Collection where Element == Record {
 	var sortedByQuarter: [Record] {
 		return self.sorted(by: { $0.quarterValue < $1.quarterValue })
-	}
-}
-
-extension UIImage {
-	func tinted(with color: UIColor) -> UIImage? {
-		UIGraphicsBeginImageContextWithOptions(size, false, scale)
-		defer { UIGraphicsEndImageContext() }
-		color.set()
-		withRenderingMode(.alwaysTemplate).draw(in: CGRect(origin: .zero, size: size))
-		return UIGraphicsGetImageFromCurrentImageContext()
 	}
 }

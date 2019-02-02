@@ -10,19 +10,16 @@ import UIKit
 
 class HomeViewDataSource: NSObject, UITableViewDataSource {
 
-	let generator = UIImpactFeedbackGenerator(style: .light)
-	private (set) var yearlyRecords = [YearRecord]()
-	
-	func setDataSource(data: [YearRecord] = [YearRecord]()) {
-		yearlyRecords = data
-	}
+	var yearlyRecords = [YearRecord]()
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return yearlyRecords.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: YearDataCell.cellID, for: indexPath) as! YearDataCell
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: YearDataCell.cellID, for: indexPath) as? YearDataCell else {
+			fatalError("invalid cell type")
+		}
 		let data = yearlyRecords[indexPath.row]
 		cell.data = data
 		cell.iconButton.tag = indexPath.row
@@ -31,7 +28,6 @@ class HomeViewDataSource: NSObject, UITableViewDataSource {
 	}
 	
 	@objc func tapped(sender: UIButton) {
-		generator.impactOccurred()
 		print("Tapped Year \(yearlyRecords[sender.tag].year)")
 	}
 

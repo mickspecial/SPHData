@@ -18,7 +18,7 @@ struct MobileData: Codable {
 		let result = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .result)
 		records = try result.decode([Record].self, forKey: .records)
 	}
-	
+
 	func encode(to encoder: Encoder) throws {
 		var container = encoder.container(keyedBy: CodingKeys.self)
 		try container.encode(success, forKey: .success)
@@ -31,16 +31,13 @@ extension MobileData {
 	// group all records with same year into dic
 	// ie 2004: [Record], 2005: [Record] etc
 	private func recordsByYear() -> [String: [Record]] {
-		let grouped = Dictionary(grouping: records) { record -> String in
-			return record.year
-		}
-		return grouped
+		return Dictionary(grouping: records) { $0.year }
 	}
 	
 	func yearlyDataRecords() -> [YearRecord] {
 		let groupedByYear = recordsByYear()
 		let tempData = groupedByYear.values.compactMap { YearRecord(group: $0) }
-		return tempData.sortedByYear
+		return tempData.sorted()
 	}
 }
 

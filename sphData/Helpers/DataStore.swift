@@ -15,6 +15,7 @@ struct DataStore {
 	static func loadSavedData() -> MobileData? {
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
+		
 		if let data = UserDefaults.standard.data(forKey: cacheKey), let savedData = try? decoder.decode(MobileData.self, from: data) {
 			return savedData
 		}

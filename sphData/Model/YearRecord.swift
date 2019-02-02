@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct YearRecord {
+struct YearRecord: Comparable {
+	
+	static func < (lhs: YearRecord, rhs: YearRecord) -> Bool {
+		return lhs.year < rhs.year
+	}
+	
 	let year: String
 	let totalData: Double
 	let quarters: [Record]

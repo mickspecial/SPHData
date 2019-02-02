@@ -50,26 +50,31 @@ class YearDataCell: UITableViewCell {
 		sv.translatesAutoresizingMaskIntoConstraints = false
 		return sv
 	}
-	
+
 	static let cellID = "yearCell"
 	private let leftStack = YearDataCell.stackSection()
 	private let rightStack = YearDataCell.stackSection()
 	private let stack = YearDataCell.stack()
-	
+
 	var data: YearRecord! {
 		didSet {
 			yearLabel.text = data.year
+			
+			if data.quarters.count < 4 {
+				yearLabel.text = data.year + " (\(data.quartersString))"
+			}
+			
 			let trimmedDouble = String(format: "%.4f", data.totalData)
 			downloadsLabel.text = "\(trimmedDouble) pb"
 			applyCellStyling(data.allQuartersDidGrow)
 		}
 	}
-	
+
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		setupView()
 	}
-	
+
 	private func setupView() {
 		leftStack.addArrangedSubview(yearLabel)
 		leftStack.addArrangedSubview(downloadsLabel)
@@ -81,7 +86,7 @@ class YearDataCell: UITableViewCell {
 		addSubview(stack)
 		setupLayout()
 	}
-	
+
 	private func setupLayout() {
 		let imageSize: CGFloat = 50
 		let margin: CGFloat = 20
@@ -95,7 +100,7 @@ class YearDataCell: UITableViewCell {
 			stack.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -margin)
 			])
 	}
-	
+
 	func applyCellStyling(_ downloadsIncreased: Bool) {
 		if downloadsIncreased {
 			downloadsLabel.textColor = Theme.current.defaultTextColor
@@ -110,4 +115,3 @@ class YearDataCell: UITableViewCell {
 		fatalError("coder not implemented")
 	}
 }
-

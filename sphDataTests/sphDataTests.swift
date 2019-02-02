@@ -8,20 +8,21 @@
 
 import XCTest
 @testable import sphData
+// swiftlint:disable all
 
 class sphDataTests: XCTestCase {
 
     func testCreateModelFromLocalFilesEmpty() {
-		let e = expectation(description: "callback closure")
+		let exp = expectation(description: "callback closure")
 
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
 		decoder.decode(MobileData.self, fromFile: "dataSet1") { testData in
 			XCTAssertTrue(testData.success)
 			XCTAssertTrue(testData.records.isEmpty)
-			e.fulfill()
+			exp.fulfill()
 		}
-		
+
 		waitForExpectations(timeout: 1) { error in
 			if let error = error {
 				XCTFail("waitForExpectationsWithTimeout errored: \(error)")
@@ -30,35 +31,35 @@ class sphDataTests: XCTestCase {
     }
 
 	func testCreateModelFromLocalFilesNonEmpty() {
-		let e = expectation(description: "callback closure")
+		let exp = expectation(description: "callback closure")
 
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
 		decoder.decode(MobileData.self, fromFile: "dataSet2") { testData in
 			XCTAssertTrue(testData.success)
 			XCTAssertEqual(testData.records.count, 5)
-			e.fulfill()
+			exp.fulfill()
 		}
-		
+
 		waitForExpectations(timeout: 1) { error in
 			if let error = error {
 				XCTFail("waitForExpectationsWithTimeout errored: \(error)")
 			}
 		}
 	}
-	
+
 	func testGetYearValueForQuarterDateFormat() {
 		let record = Record(dataVolume: "", quarter: "2008-Q1", id: 0)
 		XCTAssertEqual(record.year, "2008")
 	}
-	
+
 	func testGetQrtYearValueForQuarterDateFormat() {
 		let record = Record(dataVolume: "", quarter: "2008-Q1", id: 0)
 		XCTAssertEqual(record.quarterValue, "Q1")
 	}
 	
 	func testYearly() {
-		let e = expectation(description: "callback closure")
+		let exp = expectation(description: "callback closure")
 
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
@@ -71,7 +72,7 @@ class sphDataTests: XCTestCase {
 			let set2 = yearly.first(where: { $0.year == "2005" })
 			XCTAssertNotNil(set2)
 			XCTAssertEqual(set2!.totalData, 0.001972)
-			e.fulfill()
+			exp.fulfill()
 		}
 
 		waitForExpectations(timeout: 1) { error in
@@ -80,7 +81,7 @@ class sphDataTests: XCTestCase {
 			}
 		}
 	}
-	
+
 	func testYearlyRecordInvalidMismatchYearValues() {
 		let record = Record(dataVolume: "", quarter: "2008-Q1", id: 0)
 		let record2 = Record(dataVolume: "", quarter: "2004-Q1", id: 0)
@@ -88,7 +89,7 @@ class sphDataTests: XCTestCase {
 		let yearly = YearRecord(group: records)
 		XCTAssertNil(yearly)
 	}
-	
+
 	func testYearlyRecordDataTotal() {
 		let record = Record(dataVolume: "1", quarter: "2008-Q1", id: 0)
 		let record1 = Record(dataVolume: "2", quarter: "2008-Q2", id: 0)
