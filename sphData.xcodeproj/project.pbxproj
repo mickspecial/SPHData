@@ -22,6 +22,7 @@
 		0067C0412204EA9400F62208 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067C0402204EA9400F62208 /* HomeView.swift */; };
 		0067C043220530B900F62208 /* YearDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067C042220530B900F62208 /* YearDataCell.swift */; };
 		0067C0452205310800F62208 /* HomeViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067C0442205310800F62208 /* HomeViewDataSource.swift */; };
+		0067C04722053A8700F62208 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067C04622053A8700F62208 /* DataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		0067C0402204EA9400F62208 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0067C042220530B900F62208 /* YearDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearDataCell.swift; sourceTree = "<group>"; };
 		0067C0442205310800F62208 /* HomeViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDataSource.swift; sourceTree = "<group>"; };
+		0067C04622053A8700F62208 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			children = (
 				0067C0282203A18500F62208 /* Theme.swift */,
 				0067C03C22043E7100F62208 /* Extensions.swift */,
+				0067C04622053A8700F62208 /* DataStore.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				0067C03D22043E7100F62208 /* Extensions.swift in Sources */,
 				0067C043220530B900F62208 /* YearDataCell.swift in Sources */,
 				0067C03222042F8F00F62208 /* MobileData.swift in Sources */,
+				0067C04722053A8700F62208 /* DataStore.swift in Sources */,
 				0067C03422042FEC00F62208 /* Record.swift in Sources */,
 				0067C00B22039E6200F62208 /* HomeViewController.swift in Sources */,
 				0067C0412204EA9400F62208 /* HomeView.swift in Sources */,

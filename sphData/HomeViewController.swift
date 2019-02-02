@@ -23,10 +23,11 @@ class HomeViewController: UIViewController {
 		super.viewDidLoad()
 		setUpController()
 		setupTableView()
+		checkLocalDataStore()
 		fetchFromNetwork()
 	}
 	
-	func setUpController() {
+	private func setUpController() {
 		title = "Mobile Data Usage"
 		view.backgroundColor = Theme.current.backgroundColor
 	}
@@ -39,20 +40,31 @@ class HomeViewController: UIViewController {
 		tableDataSource.setDataSource()
 	}
 	
-	func fetchFromNetwork() {
+	private func checkLocalDataStore() {
+		if let data = DataStore.loadSavedData() {
+			print("Local Data Used")
+			refreshTableWithData(data: data)
+		}
+	}
+	
+	private func fetchFromNetwork() {
 		// URLS >> all || 5 || empty
 		let testUrl = "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
 		//let testUrl = "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&limit=5"
 		//let testUrl = "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&q=jones"
 
-		// convert to model object if able to complete fetch
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
 		decoder.decode(MobileData.self, fromURL: testUrl) { [weak self] data in
-			let yearly = data.yearlyDataRecords()
-			self?.tableDataSource.setDataSource(data: yearly)
-			self?.homeView.tableView.reloadData()
+			self?.refreshTableWithData(data: data)
+			DataStore.saveData(data: data)
 		}
+	}
+	
+	private func refreshTableWithData(data: MobileData) {
+		let yearly = data.yearlyDataRecords()
+		tableDataSource.setDataSource(data: yearly)
+		homeView.tableView.reloadData()
 	}
 }
 
