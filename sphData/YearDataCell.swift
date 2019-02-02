@@ -25,13 +25,13 @@ class YearDataCell: UITableViewCell {
 		return label
 	}()
 	
-	var iconImageView: UIImageView = {
-		let logoView = UIImageView()
-		logoView.image = #imageLiteral(resourceName: "chart-down").withRenderingMode(.alwaysTemplate).tinted(with: Theme.current.redTextColor)
-		logoView.contentMode = .scaleAspectFit
-		logoView.isHidden = true
-		logoView.translatesAutoresizingMaskIntoConstraints = false
-		return logoView
+	var iconButton: UIButton = {
+		let button = UIButton(type: UIButton.ButtonType.system)
+		let image = #imageLiteral(resourceName: "chart-down").withRenderingMode(.alwaysTemplate)
+		button.setImage(image, for: .normal)
+		button.tintColor = Theme.current.redTextColor
+		button.translatesAutoresizingMaskIntoConstraints = false
+		return button
 	}()
 	
 	private static func stackSection() -> UIStackView {
@@ -73,7 +73,7 @@ class YearDataCell: UITableViewCell {
 	private func setupView() {
 		leftStack.addArrangedSubview(yearLabel)
 		leftStack.addArrangedSubview(downloadsLabel)
-		rightStack.addArrangedSubview(iconImageView)
+		rightStack.addArrangedSubview(iconButton)
 		let internalStackPadding: CGFloat = 8
 		leftStack.spacing = internalStackPadding
 		stack.addArrangedSubview(leftStack)
@@ -99,10 +99,10 @@ class YearDataCell: UITableViewCell {
 	func applyCellStyling(_ downloadsIncreased: Bool) {
 		if downloadsIncreased {
 			downloadsLabel.textColor = Theme.current.defaultTextColor
-			iconImageView.isHidden = true
+			iconButton.isHidden = true
 		} else {
 			downloadsLabel.textColor = Theme.current.redTextColor
-			iconImageView.isHidden = false
+			iconButton.isHidden = false
 		}
 	}
 	
