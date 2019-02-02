@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Record: Codable {
+struct Record: Codable, Equatable {
 	let dataVolume: String
 	let quarter: String // 2000-Q2
 	let id: Int

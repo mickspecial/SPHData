@@ -52,6 +52,11 @@ class sphDataTests: XCTestCase {
 		XCTAssertEqual(record.year, "2008")
 	}
 	
+	func testGetQrtYearValueForQuarterDateFormat() {
+		let record = Record(dataVolume: "", quarter: "2008-Q1", id: 0)
+		XCTAssertEqual(record.quarterValue, "Q1")
+	}
+	
 	func testYearly() {
 		let e = expectation(description: "callback closure")
 
@@ -109,5 +114,50 @@ class sphDataTests: XCTestCase {
 	func testYearlyRecordInvalidEmpty() {
 		let yearly = YearRecord(group: [Record]())
 		XCTAssertNil(yearly)
+	}
+	
+	func testNoDecreaseInQrtDataForAYear() {
+		let record = Record(dataVolume: "1", quarter: "2008-Q1", id: 0)
+		let record1 = Record(dataVolume: "2", quarter: "2008-Q2", id: 0)
+		let record2 = Record(dataVolume: "3", quarter: "2008-Q3", id: 0)
+		let record3 = Record(dataVolume: "4", quarter: "2008-Q4", id: 0)
+		let records = [record, record1, record2, record3].shuffled()
+		let yearly = YearRecord(group: records)!
+		XCTAssertTrue(yearly.allQuartersDidGrow)
+	}
+	
+	func testDecreaseInQrtDataForAYear() {
+		let record = Record(dataVolume: "1", quarter: "2008-Q1", id: 0)
+		let record1 = Record(dataVolume: "2", quarter: "2008-Q2", id: 0)
+		let record2 = Record(dataVolume: "3", quarter: "2008-Q3", id: 0)
+		let record3 = Record(dataVolume: "1", quarter: "2008-Q4", id: 0)
+		let records = [record, record1, record2, record3].shuffled()
+		let yearly = YearRecord(group: records)!
+		XCTAssertFalse(yearly.allQuartersDidGrow)
+	}
+	
+	func testSameQrtDataForAYear() {
+		let record = Record(dataVolume: "1", quarter: "2008-Q1", id: 0)
+		let record1 = Record(dataVolume: "1", quarter: "2008-Q2", id: 0)
+		let records = [record, record1].shuffled()
+		let yearly = YearRecord(group: records)!
+		XCTAssertTrue(yearly.allQuartersDidGrow)
+	}
+	
+	func testNoDecreaseInQrtDataForAYearSingleQrt() {
+		let record = [Record(dataVolume: "10", quarter: "2008-Q1", id: 0)]
+		let yearly = YearRecord(group: record)!
+		XCTAssertTrue(yearly.allQuartersDidGrow)
+	}
+	
+	func testSortByQuarter() {
+		let record = Record(dataVolume: "1", quarter: "2008-Q1", id: 0)
+		let record1 = Record(dataVolume: "2", quarter: "2008-Q2", id: 0)
+		let record2 = Record(dataVolume: "3", quarter: "2008-Q3", id: 0)
+		let record3 = Record(dataVolume: "4", quarter: "2008-Q4", id: 0)
+		let records = [record, record1, record2, record3].shuffled()
+		let sorted = records.sortedByQuarter
+		XCTAssertEqual(sorted.map({ $0.quarterValue }), ["Q1", "Q2", "Q3", "Q4"])
+		XCTAssertEqual(sorted, [record, record1, record2, record3])
 	}
 }

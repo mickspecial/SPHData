@@ -55,3 +55,9 @@ extension Collection where Element == YearRecord {
 	}
 }
 
+extension Collection where Element == Record {
+	var sortedByQuarter: [Record] {
+		return self.sorted(by: { $0.quarterValue < $1.quarterValue })
+	}
+}
+
