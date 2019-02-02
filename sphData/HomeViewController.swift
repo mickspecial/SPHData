@@ -41,14 +41,11 @@ class HomeViewController: UITableViewController {
 	}
 	
 	private func fetchFromNetwork() {
-		// URLS >> all || 5 || empty
-		let testUrl = "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
-		//let testUrl = "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&limit=5"
-		//let testUrl = "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&q=jones"
+		let dataUrl = "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
 
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
-		decoder.decode(MobileData.self, fromURL: testUrl) { [weak self] data in
+		decoder.decode(MobileData.self, fromURL: dataUrl) { [weak self] data in
 			self?.refreshTableWithData(data: data)
 			DataStore.saveData(data: data)
 		}
