@@ -10,7 +10,7 @@ import Foundation
 
 struct Record: Codable {
 	let dataVolume: String
-	let quarter: String
+	let quarter: String // 2000-Q2
 	let id: Int
 	
 	var dataVolumeDouble: Double {
@@ -20,8 +20,14 @@ struct Record: Codable {
 	}
 	
 	var year: String {
+		// ie 2000 from 2000-Q2
 		assert(quarter.count == 7, "Assumed all dates returned have 7 characters")
 		return String(quarter.prefix(4))
+	}
+	
+	var quarterValue: String {
+		// ie Q2 from 2000-Q2
+		return String(quarter.suffix(2))
 	}
 }
 

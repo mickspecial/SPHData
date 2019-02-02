@@ -13,6 +13,11 @@ struct YearRecord {
 	let totalData: Double
 	let quarters: [Record]
 	
+	var quartersString: String {
+		// ie Q4・Q3
+		return quarters.map({ $0.quarterValue }).joined(separator: "・")
+	}
+	
 	init?(group: [Record]) {
 		let years = Set(group.map({ $0.year }))
 		if group.isEmpty || group.count > 4 || years.count > 1 {

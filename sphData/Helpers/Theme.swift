@@ -14,8 +14,10 @@ enum Theme {
 
 protocol ThemeProtocol {
 	var backgroundColor: UIColor { get }
+	var defaultCellHeight: CGFloat { get }
 }
 
 class DefaultTheme: ThemeProtocol {
 	var backgroundColor: UIColor { return UIColor.lightGray }
+	var defaultCellHeight: CGFloat { return 80 }
 }

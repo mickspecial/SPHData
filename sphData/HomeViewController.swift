@@ -9,10 +9,20 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
+	
+	private let tableDataSource = HomeViewDataSource()
+	var homeView: HomeView {
+		return view as! HomeView
+	}
+		
+	override func loadView() {
+		view = HomeView()
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setUpController()
+		setupTableView()
 		fetchFromNetwork()
 	}
 	
@@ -21,20 +31,31 @@ class HomeViewController: UIViewController {
 		view.backgroundColor = Theme.current.backgroundColor
 	}
 	
+	private func setupTableView() {
+		view.addSubview(homeView.tableView)
+		homeView.tableView.delegate = self
+		homeView.tableView.register(YearDataCell.self, forCellReuseIdentifier: YearDataCell.cellID)
+		homeView.tableView.dataSource = tableDataSource
+		tableDataSource.setDataSource()
+	}
+	
 	func fetchFromNetwork() {
-		// all
+		// URLS >> all || 5 || empty
 		let testUrl = "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
-		// 5 only
 		//let testUrl = "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&limit=5"
-		// empty
 		//let testUrl = "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&q=jones"
 
 		// convert to model object if able to complete fetch
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
-		decoder.decode(MobileData.self, fromURL: testUrl) { data in
-			let yearRecords = data.yearlyDataRecords()
-			print(yearRecords)
+		decoder.decode(MobileData.self, fromURL: testUrl) { [weak self] data in
+			let yearly = data.yearlyDataRecords()
+			self?.tableDataSource.setDataSource(data: yearly)
+			self?.homeView.tableView.reloadData()
 		}
 	}
+}
+
+extension HomeViewController: UITableViewDelegate {
+
 }
