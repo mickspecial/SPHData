@@ -14,7 +14,7 @@ class HomeView: UIView {
 		let tv = UITableView()
 		tv.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
 		tv.rowHeight = Theme.current.defaultCellHeight
-		tv.allowsMultipleSelectionDuringEditing = true
+		tv.allowsSelection = false
 		tv.translatesAutoresizingMaskIntoConstraints = false
 		return tv
 	}()

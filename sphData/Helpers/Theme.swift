@@ -17,6 +17,8 @@ protocol ThemeProtocol {
 	var defaultCellHeight: CGFloat { get }
 	var defaultTextColor: UIColor { get }
 	var redTextColor: UIColor { get }
+	var titleFont: UIFont { get }
+	var subTitleFont: UIFont { get }
 }
 
 class DefaultTheme: ThemeProtocol {
@@ -24,4 +26,6 @@ class DefaultTheme: ThemeProtocol {
 	var defaultCellHeight: CGFloat { return 80 }
 	var defaultTextColor: UIColor { return UIColor.black }
 	var redTextColor: UIColor { return UIColor.red }
+	var titleFont: UIFont { return UIFont.systemFont(ofSize: 20, weight: .medium) }
+	var subTitleFont: UIFont { return UIFont.systemFont(ofSize: 16, weight: .regular) }
 }
