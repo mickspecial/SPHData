@@ -30,6 +30,7 @@ class HomeViewController: UITableViewController {
 		tableView.rowHeight = Theme.current.defaultCellHeight
 		tableView.allowsSelection = false
 		tableView.dataSource = tableDataSource
+		tableDataSource.imageSelectionDelegate = self
 	}
 	
 	private func checkLocalDataStore() {
@@ -51,6 +52,10 @@ class HomeViewController: UITableViewController {
 			self?.refreshTableWithData(data: data)
 			DataStore.saveData(data: data)
 		}
+	}
+
+	@objc func tapped(sender: UIButton) {
+		print("Tapped Year \(tableDataSource.yearlyRecords[sender.tag].year)")
 	}
 	
 	private func refreshTableWithData(data: MobileData) {

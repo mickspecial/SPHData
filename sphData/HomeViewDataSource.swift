@@ -11,6 +11,7 @@ import UIKit
 class HomeViewDataSource: NSObject, UITableViewDataSource {
 
 	var yearlyRecords = [YearRecord]()
+	weak var imageSelectionDelegate: HomeViewController?
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return yearlyRecords.count
@@ -23,12 +24,7 @@ class HomeViewDataSource: NSObject, UITableViewDataSource {
 		let data = yearlyRecords[indexPath.row]
 		cell.data = data
 		cell.iconButton.tag = indexPath.row
-		cell.iconButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
+		cell.iconButton.addTarget(imageSelectionDelegate, action: #selector(HomeViewController.tapped), for: .touchUpInside)
 		return cell
 	}
-	
-	@objc func tapped(sender: UIButton) {
-		print("Tapped Year \(yearlyRecords[sender.tag].year)")
-	}
-
 }
